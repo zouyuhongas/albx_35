@@ -1,12 +1,12 @@
 // 前端页面
 exports.getListPage = (req,res)=>{
-    res.render('/list.ejs');
+    res.render('list.ejs');
 }
 exports.getDetailPage = (req,res)=>{
-    res.render('/detail.ejs');
+    res.render('detail.ejs');
 }
 exports.getIndexPage = (req,res)=>{
-    res.render('/index.ejs');
+    res.render('index.ejs');
 }
 // 后端管理页面
 exports.getAdminIndexPage = (req,res)=>{
