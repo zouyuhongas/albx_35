@@ -8,9 +8,20 @@ exports.getDetailPage = (req,res)=>{
 exports.getIndexPage = (req,res)=>{
     res.render('/index.ejs');
 }
-// 后端页面
+// 后端管理页面
 exports.getAdminIndexPage = (req,res)=>{
-    res.render('admin/index.ejs');
+
+    if(req.session.isLogin && req.session.isLogin == 'true'){
+        res.render('admin/index.ejs')
+    }else{
+        // 重定向 : 以响应头的方式来实现
+        // 重定向: 让url重新指向一个新的值,本质上让url或者路由有一个变化
+        res.writeHead(301,{
+            'Location' : '/admin/login'
+        })
+        res.end();
+    }
+
 }
 exports.getAdminCategoriesPage = (req,res)=>{
     res.render('admin/categories.ejs');
