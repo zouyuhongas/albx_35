@@ -3,6 +3,7 @@ const express = require('express');
 // 引入模块
 const pagesController = require('./controller/pageController');
 const userController = require('./controller/userController');
+const postController = require('./controller/postController');
 var router = express.Router();
 // 添加静态页面
 router.get('/admin/index',pagesController.getAdminIndexPage)
@@ -21,5 +22,6 @@ router.get('/admin/index',pagesController.getAdminIndexPage)
       .get('/detail',pagesController.getDetailPage)
       .get('/list',pagesController.getListPage)
       // 请求数据
-      .post('/login',userController.login);
+      .post('/login',userController.login)
+      .get('/getAllPost',postController.getAllPost)
 module.exports = router;

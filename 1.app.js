@@ -3,7 +3,7 @@
 const express = require('express');   
 // 创建服务器
 const app = express();
-const router = require('./2.router');
+const router = require('./2.router.js');
 const session = require('express-session');
 const bodyParser = require('body-parser')
 // 绑定端口和ip
