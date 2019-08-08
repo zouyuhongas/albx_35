@@ -4,6 +4,8 @@ const express = require('express');
 const pagesController = require('./controller/pageController');
 const userController = require('./controller/userController');
 const postController = require('./controller/postController');
+const cateController = require('./controller/cateController');
+
 var router = express.Router();
 // 添加静态页面
 router.get('/admin/index',pagesController.getAdminIndexPage)
@@ -24,4 +26,5 @@ router.get('/admin/index',pagesController.getAdminIndexPage)
       // 请求数据
       .post('/login',userController.login)
       .get('/getAllPost',postController.getAllPost)
+      .get('/getAllCate',cateController.getAllCate)
 module.exports = router;

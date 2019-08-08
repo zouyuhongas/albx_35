@@ -34,6 +34,11 @@ app.set('views',__dirname+'/views');
   app.use(bodyParser.urlencoded({extended: false}))
   // 后期你可能会传递json格式字符串
   app.use(bodyParser.json())
+  // 导航守卫
+  // 重定向,有三种状态不用登陆
+  // 1.登录页不用登陆
+  // 2.登陆过的页面不用再登陆
+  // 3.前面的3个页面不用登陆
 app.use(function(req,res,next){
   if(req.session.isLogin && req.session.isLogin == 'true' || req.url =='/admin/login' || req.url.indexOf('/admin') == -1){
     next()
