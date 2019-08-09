@@ -18,6 +18,7 @@ exports.login = (req,res) =>{
                     req.session.isLogin = 'true';
                     // 将当前用户的对象存储到session
                     req.session.currentUser = data;
+                    console.log(req.session.currentUser,'================')
                     res.end(JSON.stringify({code:200,msg:'登陆成功'})) 
                 }else{
                     res.json({code:400,msg:'密码错误'});

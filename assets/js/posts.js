@@ -64,7 +64,6 @@ var pageSize = 2;
             cate : $('.cateSelector').val(),
             status : $('.statuSelector').val()
         }
-           console.log(obj);
         //    发起ajax请求
            init(obj);
     })

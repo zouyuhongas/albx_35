@@ -6,7 +6,6 @@ $(function(){
             dataType: 'json',
             data : $('form').serialize(),//serialize可以获取制定表单里的那么属性的表单元素的value值
             success : function(res){
-                    console.log(res);
                     if(res.code ==400){
                         // 如果错误显示错误信息
                         $('.alert-danger > span').text(res.msg);

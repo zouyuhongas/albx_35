@@ -6,10 +6,8 @@ const moment = require('moment');
 exports.getAllPost = (req,res) =>{
     // 获取用户的参数
     var obj = req.query;
-    console.log(obj)
     // 调用数据模块
     postAllModel.getAllPost(obj,(err,data)=>{
-        console.log(data)
         if(err){
             res.json({code : 400,msg : '操作失败'});
         }else{
@@ -21,6 +19,28 @@ exports.getAllPost = (req,res) =>{
                 code : 200,
                 msg : '操作成功',
                 data : data
+            })
+        }
+    })
+}
+
+exports.addPost = (req,res) =>{
+    console.log(req,'??????????????')
+    // 接收参数
+    var obj = req.body;
+    // 添加数据库所需要的三个字段的数据
+    obj.views = 0;
+    obj.likes = 0;
+    obj.user_id = req.session.currentUser.id
+    // 调用数据模块中的方法
+    postAllModel.addPost(obj,(err)=>{
+        if(err){
+            console.log(err);
+            res.json({code : 400,msg : '数据新增失败'})
+        }else{
+            res.json({
+                code : 200,
+                msg: '数据新增成功'
             })
         }
     })
