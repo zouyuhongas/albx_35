@@ -14,12 +14,12 @@ exports.uploadFile =(req,res) =>{
 //  设置保留文件的扩展名
    form.keepExtensions = true;
 //    调用方法实现文件上传
-    // req:请求报文
+    // req:请求报文 
     // err:错误信息
     // Fields：普通键值对
     // files: 文件上传完成之后的相关信息,主要存储上传成功之后的信息
     form.parse(req,(err,fields,files)=>{
-        if(err){
+        if(err){ 
             res.json({
                 code: 400,
                 msg : '文件上传失败'

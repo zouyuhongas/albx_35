@@ -58,14 +58,35 @@ var pageSize = 2;
             $('.cateSelector').html(str);
         }
     })
-    // 实现帅选功能
+    // 实现筛选功能
     $('.btn-search').on('click',function(){
         var obj = {
             cate : $('.cateSelector').val(),
             status : $('.statuSelector').val()
         }
+        console.log(obj)
         //    发起ajax请求
            init(obj);
     })
 
+
+    // 实现文章删除
+    $('tbody').on('click','.btnDel',function(){
+        var id = $(this).data('id');
+        console.log(111111111111)
+        // 弹出确认框
+        if(confirm('请问是否真的要删除')){
+            $.ajax({
+                url : '/delPostById?id='+id,
+                type : 'get',
+                dataType : 'json',
+                success : function(res){
+                    if(res.code ==200){
+                        $('.alert-danger > span').text(res.msg)
+                        $('.alert-danger').fadeIn(500).delay(3000).fadeOut(500)
+                    }
+                }
+            })
+        }
+    })
 })

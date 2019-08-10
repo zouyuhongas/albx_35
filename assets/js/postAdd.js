@@ -1,4 +1,8 @@
 $(function(){
+
+
+    // 编辑的话 是不是要获取url的id
+    // let id =  kenghuo.getParams()
     // 选择文件就开始文件的上传操作
     $('#feature').on('change',function(){
         // 经典: formdata + ajax
@@ -51,16 +55,26 @@ $(function(){
     // 创建ckeditor富文本框控件替换页面中的textarea
     // 他会创建一个富文本框对象
     CKEDITOR.replace('content');
-
+    let id = kenghuo.getParameter(location.search).id;
     // 保存文件
     $('.btnsave').on('click',function(e){
         e.preventDefault()
         // 同步数据到textarea
         CKEDITOR.instances.content.updateElement();
-        console.log($('form').serialize());
+        // console.log($('form').serialize());
+        if(id){
+            opt('/editPostById')
+        }else{
+            opt('/addPost')
+        }
+       
+    })
+
+    // 实现编辑和新增
+    function opt(url){
         $.ajax({
             type : 'post',
-            url : '/addPost',
+            url : url,
             data : $('form').serialize(),
             dataType : 'json',
             success : function(res){
@@ -73,7 +87,34 @@ $(function(){
                 }
             }
         })
-    })
-
+    }
+    
+    // 判断当前是编辑还是新增
+    if(id){
+        // 根据id号发起ajax请求
+        // 有id号就是新增,没有就是编辑
+        $.ajax({
+            type : 'get',
+            url : '/getPostById',
+            data: {id},
+            dataType : 'json',
+            success : function(res){
+                console.log(res);
+                // 实现数据展示
+                $('#title').val(res.data.title);
+                $('#content').val(res.data.content);
+                $('#slug').val(res.data.slug);
+                $('.thumbnail').attr('src','/uploads/'+res.data.feature).show();
+                $('#category').val(res.data.category_id)
+                $('#status').val(res.data.status)
+                // 图片隐藏域
+                $('[name=feature]').val(res.data.feature)
+                // id隐藏域
+                $('[name="id"]').val(res.data.id)
+                // 时间处理
+                $('#created').val(res.data.created)
+            }
+        })
+    }
 
 })

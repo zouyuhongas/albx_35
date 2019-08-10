@@ -59,3 +59,40 @@ exports.addPost = (obj,callback)=>{
         }
     })
 }
+
+// 根据id获取文章的详细数据
+exports.getpostById = (id,callback)=>{
+    var sql = `select * from posts where id =` +id;
+    conn.query(sql,(err,results)=>{
+        if(err){
+            callback(err)
+        }else{
+            callback(null,results[0])
+        }
+    })
+}
+
+// 根据id实现文章的编辑
+exports.editPostById = (obj,callback)=>{
+    var sql = `updata posts set ? where id = ?`;
+    // 使用时间委托来吧动态生成的结构进行编辑
+    conn.query(sql,[obj,obj.id],(err,results)=>{
+        if(err){
+            callback(err)
+        }else{
+            callback(null);
+        }
+    })
+}
+
+// 根据文章的id实现文章删除
+exports.delPostById = (id,callback)=>{
+    var sql = 'delete from posts where id = ?';
+    conn.query(sql,[id],(err)=>{
+        if(err){
+            callback(err);
+        }else{
+            callback(null);
+        }
+    })
+}

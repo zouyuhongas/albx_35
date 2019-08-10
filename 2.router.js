@@ -28,7 +28,10 @@ router.get('/admin/index',pagesController.getAdminIndexPage)
 
       .get('/getAllPost',postController.getAllPost)
       .post('/addPost',postController.addPost)
-
+      .get('/getpostById',postController.getpostById)
+      .post('/editPostById',postController.editPostById)
+      .get('/delPostById',postController.delPostById)
+      
       .get('/getAllCate',cateController.getAllCate)
 
       .post('/uploadFile',uploadController.uploadFile)

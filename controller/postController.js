@@ -25,7 +25,6 @@ exports.getAllPost = (req,res) =>{
 }
 
 exports.addPost = (req,res) =>{
-    console.log(req,'??????????????')
     // 接收参数
     var obj = req.body;
     // 添加数据库所需要的三个字段的数据
@@ -44,4 +43,51 @@ exports.addPost = (req,res) =>{
             })
         }
     })
+}
+
+// 根据Id获取文章的详细数据
+exports.getpostById = (req,res) =>{
+    var id = req.query.id;
+    postAllModel.getpostById(id,(err,data)=>{
+        if(err){
+            res.json({code : 400, msg:'数据新增失败'})
+        }else{
+            data.created = moment(data.created).format('YYY-MM-DDTHH:mm')
+            res.json({
+                code : 200,
+                msg: '数据新增成功',
+                data : data
+            })
+        }
+    })
+}
+// 实现文章的修改
+exports.editPostById = (req,res)=>{
+    var obj = req.body;
+    postModel.editPostById(obj,(err,)=>{
+        if(err){
+            res.json({code:400,msg:'文章编辑失败'})
+        }else{
+            res.json({
+                code: 200,
+                msg : '文章编辑成功',
+            })
+        }
+    })
+}
+
+// 实现文章删除
+exports.delPostById = (req,res)=>{
+    var id = req.query.id
+    console.log(id,1111111111111111111111);
+    postModel.delPostById(id,(err)=>{
+        if(err){
+            res.json({code:400,msg:'文章删除失败'})
+        }else{
+            res.json({
+                code : 200,
+                msg : '文章删除成功'
+            })
+        }
+    }) 
 }
