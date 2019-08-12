@@ -32,7 +32,7 @@ exports.getAllPost = (obj, callback) => {
             join users on posts.user_id = users.id
             join categories on posts.category_id = categories.id
             where 2=2 `
-            console.log(sql)
+            // console.log(sql)
             conn.query(sql, (err2, res2) => {
                
                 if (err2) {
@@ -74,13 +74,14 @@ exports.getpostById = (id,callback)=>{
 
 // 根据id实现文章的编辑
 exports.editPostById = (obj,callback)=>{
-    var sql = `updata posts set ? where id = ?`;
+    var sql = `update posts set ? where id = ?`;
     // 使用时间委托来吧动态生成的结构进行编辑
     conn.query(sql,[obj,obj.id],(err,results)=>{
         if(err){
             callback(err)
         }else{
             callback(null);
+            // console.log()
         }
     })
 }

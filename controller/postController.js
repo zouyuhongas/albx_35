@@ -13,7 +13,7 @@ exports.getAllPost = (req,res) =>{
         }else{
             for(var i =0; i < data.length;i++){
                 // 转换时间的格式data数组里面中的created是数据库里的id名
-                data[i].created = moment(data[i].created).format('YYY-MM-DD HH-mm-ss');
+                data[i].created = moment(data[i].created).format('YYYY-MM-DDTHH:mm');
             }
             res.json({
                 code : 200,
@@ -34,7 +34,6 @@ exports.addPost = (req,res) =>{
     // 调用数据模块中的方法
     postAllModel.addPost(obj,(err)=>{
         if(err){
-            console.log(err);
             res.json({code : 400,msg : '数据新增失败'})
         }else{
             res.json({
@@ -49,6 +48,7 @@ exports.addPost = (req,res) =>{
 exports.getpostById = (req,res) =>{
     var id = req.query.id;
     postAllModel.getpostById(id,(err,data)=>{
+        // console.log(err,11111111111)
         if(err){
             res.json({code : 400, msg:'数据新增失败'})
         }else{
@@ -64,8 +64,10 @@ exports.getpostById = (req,res) =>{
 // 实现文章的修改
 exports.editPostById = (req,res)=>{
     var obj = req.body;
-    postModel.editPostById(obj,(err,)=>{
+    // console.log(obj)
+    postAllModel.editPostById(obj,(err)=>{
         if(err){
+            console.log(err)
             res.json({code:400,msg:'文章编辑失败'})
         }else{
             res.json({
@@ -79,8 +81,7 @@ exports.editPostById = (req,res)=>{
 // 实现文章删除
 exports.delPostById = (req,res)=>{
     var id = req.query.id
-    console.log(id,1111111111111111111111);
-    postModel.delPostById(id,(err)=>{
+    postAllModel.delPostById(id,(err)=>{
         if(err){
             res.json({code:400,msg:'文章删除失败'})
         }else{

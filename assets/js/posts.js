@@ -64,7 +64,7 @@ var pageSize = 2;
             cate : $('.cateSelector').val(),
             status : $('.statuSelector').val()
         }
-        console.log(obj)
+        // console.log(obj)
         //    发起ajax请求
            init(obj);
     })
@@ -73,7 +73,7 @@ var pageSize = 2;
     // 实现文章删除
     $('tbody').on('click','.btnDel',function(){
         var id = $(this).data('id');
-        console.log(111111111111)
+        // console.log(111111111111)
         // 弹出确认框
         if(confirm('请问是否真的要删除')){
             $.ajax({
@@ -83,7 +83,14 @@ var pageSize = 2;
                 success : function(res){
                     if(res.code ==200){
                         $('.alert-danger > span').text(res.msg)
-                        $('.alert-danger').fadeIn(500).delay(3000).fadeOut(500)
+                        $('.alert-danger').fadeIn(500).delay(3000).fadeOut(500);
+
+                        if($('tbody > tr').length ==1){
+                            if(pageNum > 1){
+                                pageNum --;
+                            }
+                        }
+                        init();
                     }
                 }
             })

@@ -95,11 +95,10 @@ $(function(){
         // 有id号就是新增,没有就是编辑
         $.ajax({
             type : 'get',
-            url : '/getPostById',
+            url : '/getpostById',
             data: {id},
             dataType : 'json',
             success : function(res){
-                console.log(res);
                 // 实现数据展示
                 $('#title').val(res.data.title);
                 $('#content').val(res.data.content);

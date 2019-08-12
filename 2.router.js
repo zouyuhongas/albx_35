@@ -6,6 +6,7 @@ const userController = require('./controller/userController');
 const postController = require('./controller/postController');
 const cateController = require('./controller/cateController');
 const uploadController = require('./controller/uploadController');
+const optionsController = require('./controller/optionsController')
 var router = express.Router();
 // 添加静态页面
 router.get('/admin/index',pagesController.getAdminIndexPage)
@@ -31,8 +32,10 @@ router.get('/admin/index',pagesController.getAdminIndexPage)
       .get('/getpostById',postController.getpostById)
       .post('/editPostById',postController.editPostById)
       .get('/delPostById',postController.delPostById)
-      
       .get('/getAllCate',cateController.getAllCate)
-
+      .post('/editCate',cateController.editCate)
       .post('/uploadFile',uploadController.uploadFile)
+      .post('/addCate',cateController.addCate)
+      .get('/delCateById',cateController.delCateById)
+      .post('/addMenu',optionsController.addMenu)
 module.exports = router;
